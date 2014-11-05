@@ -21,7 +21,7 @@ case "$1" in
     start)
         echo -n 'Starting EventStore'
         nohup "$EVENTSTORE_BIN" \
-            --ip=0.0.0.0 \
+            --ext-ip=0.0.0.0 \
             --run-projections=all \
             --db /var/lib/eventstore \
             --log /var/log/eventstore \
