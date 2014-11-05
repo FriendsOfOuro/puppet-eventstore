@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# Copyright (c) 2014 Davide Bellettini
+#
+### BEGIN INIT INFO
+# Provides:          eventstore 
+# Required-Start:    $network
+# Required-Stop:
+# Default-Start:     3 5
+# Default-Stop:      0 1 2 6
+# Short-Description: Greg Young's EventStore
+# Description:       Event sourced database
+### END INIT INFO
+EVENTSTORE_BIN=/opt/eventstore/clusternode
+
+test -x $EVENTSTORE_BIN || { echo "$EVENTSTORE_BIN not installed";
+    if [ "$1" = "stop" ]; then exit 0;
+    else exit 5; fi; }
+
+case "$1" in
+    start)
+        echo -n 'Starting EventStore'
+        nohup "$EVENTSTORE_BIN" --db /var/lib/eventstore --log /var/log/eventstore >> /var/log/eventstore.log 2>&1&
+        echo $! > /var/run/eventstore.pid
+    ;;
+    stop)
+        kill $(cat /var/run/eventstore.pid)
+    ;;
+esac
