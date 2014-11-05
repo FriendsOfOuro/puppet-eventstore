@@ -20,7 +20,12 @@ test -x $EVENTSTORE_BIN || { echo "$EVENTSTORE_BIN not installed";
 case "$1" in
     start)
         echo -n 'Starting EventStore'
-        nohup "$EVENTSTORE_BIN" --db /var/lib/eventstore --log /var/log/eventstore >> /var/log/eventstore.log 2>&1&
+        nohup "$EVENTSTORE_BIN" \
+            --ip=0.0.0.0 \
+            --run-projections=all \
+            --db /var/lib/eventstore \
+            --log /var/log/eventstore \
+        >> /var/log/eventstore.log 2>&1&
         echo $! > /var/run/eventstore.pid
     ;;
     stop)
