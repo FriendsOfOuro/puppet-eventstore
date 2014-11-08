@@ -6,6 +6,7 @@ class eventstore::service
     mode => '0755',
   }->
   service { 'eventstore':
-    enable => true
+    enable => true,
+    ensure => 'running',
   }
 }
