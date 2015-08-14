@@ -3,7 +3,7 @@
 # Copyright (c) 2014 Davide Bellettini
 #
 ### BEGIN INIT INFO
-# Provides:          eventstore 
+# Provides:          eventstore
 # Required-Start:    $network
 # Required-Stop:
 # Default-Start:     3 5
@@ -20,6 +20,7 @@ test -x $EVENTSTORE_BIN || { echo "$EVENTSTORE_BIN not installed";
 case "$1" in
     start)
         echo -n 'Starting EventStore'
+        cd /opt/eventstore/
         nohup "$EVENTSTORE_BIN" \
             --ext-ip=0.0.0.0 \
             --run-projections=all \
