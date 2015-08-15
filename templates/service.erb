@@ -23,7 +23,7 @@ case "$1" in
         cd /opt/eventstore/
         nohup "$EVENTSTORE_BIN" \
             --ext-ip=0.0.0.0 \
-            --http-prefixes=http://*:2113/ \
+            --http-prefixes=<%= @http_prefixes %> \
             --run-projections=all \
             --db /var/lib/eventstore \
             --log /var/log/eventstore \
