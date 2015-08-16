@@ -9,16 +9,13 @@ class eventstore::package
 
   wget::fetch {$url:
     destination => $tarball
-  }
-
+  } ->
   exec { 'untar_eventstore':
     command => "tar xvzf $tarball && mv EventStore-OSS-Linux-v$version eventstore-$version",
     cwd     => '/opt',
     creates => "${dir}-$version",
     path    => ['/bin', '/usr/bin'],
-    before  => File[$dir],
-  }
-
+  } ->
   file { "${dir}":
     ensure => link,
     target => "${dir}-$version"
